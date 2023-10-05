@@ -6,9 +6,6 @@ const resetPassword = require('../controllers/user/resetPassword')
 //Signup and generate the activation link
 router.post('/signup',userController.signup);
 
-//Verifying the activation token
-router.post('/accountVerify/:token',userController.accountVerify);
-
 //Signin and generate JWT token
 router.post('/signin',userController.signin);
 

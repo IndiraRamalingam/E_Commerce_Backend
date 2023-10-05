@@ -92,43 +92,7 @@ const userController={
         }
     },
 
-    //To verify the account activation link token
-    accountVerify:async(req,res)=>{
-        try{
-            const{token} = req.body;
-      
-             let userDB=await User.findOne({ resetToken: token });
-      
-              //checking token is present in db is the token sent by the user or not
-              const isTokenValid = userDB.resetToken === token;
-      
-              //checking if the time limit to change the password has the expired
-              const isntExpired = userDB.resetExpiry > Date.now();
-      
-              if (isTokenValid && isntExpired) {
-      
-                //deleting the token and expiry time update the activated status to true
-                const updateActiveStatus = await User.findOneAndUpdate(
-                  { resetToken: token },
-                     { 
-                      activated: true,
-                      resetToken: undefined,
-                      resetExpiry: undefined,                
-                     },
-                  { new: true }
-                );
-      
-                res.status(200).send({ success: "Activation updated successfully" });
-              } 
-              else res.status(400).send({ Error: "Invalid Link or Expired !!!" });
-      
-                }
-                catch(error)
-                {
-                  console.log("Activation failed in backend", error);
-                }       
-    },
-
+    
       //To get the ID of User
       getUserID:async(req,res)=>{
         try{
@@ -141,7 +105,8 @@ const userController={
             }
             const user=await User.findById(decodedToken.userId).exec();
             const user_ID=user._id
-            res.status(200).json({user_ID})
+            const user_name=user.name
+            res.status(200).json({user_ID,user_name})
             
         }
         catch(error){
