@@ -1,7 +1,7 @@
-const express=require('express')
-const router=express.Router();
-const contactController=require('../controllers/contactController')
+const express = require('express')
+const router = express.Router();
+const contactController = require('../controllers/contactController')
 
-router.post('/',contactController.contactControl)
+router.post('/', contactController.contactControl)
 
-module.exports=router;
+module.exports = router;

@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer')
-const CONFIG=require('../utils/config')
+const CONFIG = require('../utils/config')
 
 
 const sendMail = async (email, subject, text) => {
@@ -7,7 +7,7 @@ const sendMail = async (email, subject, text) => {
     service: 'gmail',
     host: "smtp.gmail.com",
     port: 465,
-    secure: true, 
+    secure: true,
     auth: {
       user: CONFIG.USER,
       pass: CONFIG.PASSWORD,
@@ -27,4 +27,4 @@ const sendMail = async (email, subject, text) => {
   });
 };
 
-module.exports= sendMail;
+module.exports = sendMail;
